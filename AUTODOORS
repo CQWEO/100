@@ -2,7 +2,6 @@
 -- Thanks Lion Kc Lee, WaterSea_King
 
 if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Hotel"
-end
 
 local PathfindingService = game:GetService("PathfindingService")
 local VirtualInputManager = game:GetService('VirtualInputManager')
@@ -38,8 +37,8 @@ local Folder = Instance.new("Folder")
 Folder.Parent = workspace
 Folder.Name = "PathFindPartsFolder"
 
-if LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("A90") then
-    LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.A90.Name = "lol" -- Fuck you A90
+if LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("SeekMoving") then
+    LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.A90.Name = "lol" -- Fuck you SeekMoving
 end
 
 function getWardrobe()
