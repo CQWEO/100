@@ -177,8 +177,8 @@ game:GetService("RunService").RenderStepped:connect(function()
     end
 end)
 
-local Key = workspace:FindFirstChild("Key") or workspace:FindFirstChild("AmbushMoving")
-    if Entity then
+local Key = workspace:FindFirstChild("Key") 
+    if Key then
         if Path then
             if Path.Parent.Name == "Key" then
                 if Entity.Main.Position.Y > -4 then
