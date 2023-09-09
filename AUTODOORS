@@ -86,9 +86,32 @@ function getWardrobe()
     return Closest
 end
 
+function getKey()
+    local Closest
+
+    for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
+        if v.Name == "Key" then
+            if v:FindFirstChild("Door") and v:FindFirstChild("GetPlayer") then
+                if v.GetPlayer.Value == nil then
+                    if v.Door.Position.Y > -3 then -- Prevents going to the lower lockers in the room with the bridge 
+                        if Closest == nil then
+                            Closest = v.Door
+                        else
+                            if (LocalPlayer.Character.HumanoidRootPart.Position - v.Door.Position).Magnitude < (Closest.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude then
+                                Closest = v.Door
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return Closest
+end
+
 function getPath()
     local Part
-	
+
     local Entity = workspace:FindFirstChild("RushMoving") or workspace:FindFirstChild("AmbushMoving")
     if Entity and Entity.Main.Position.Y > -4 then
         Part = getWardrove()
@@ -125,7 +148,7 @@ game:GetService("RunService").RenderStepped:connect(function()
     LocalPlayer.Character.Collision.CanCollide = false
     LocalPlayer.Character.Collision.Size = Vector3.new(8,LocalPlayer.Character.Collision.Size.Y,8)
 
-    LocalPlayer.Character.Humanoid.WalkSpeed = 21
+    LocalPlayer.Character.Humanoid.WalkSpeed = 30
 
     local Path = getPath()
     
@@ -144,12 +167,37 @@ game:GetService("RunService").RenderStepped:connect(function()
         end
         if Entity.Main.Position.Y < -4 then
             if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
-                LocalPlayer.Character:SetAttribute("Hiding", false)
+                LocalPlayer.Character:SetAttribute("Hiding", true)
             end
         end
     else
         if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
-            LocalPlayer.Character:SetAttribute("Hiding", false)
+            LocalPlayer.Character:SetAttribute("Hiding", true)
+        end
+    end
+end)
+
+local Key = workspace:FindFirstChild("Key") or workspace:FindFirstChild("AmbushMoving")
+    if Entity then
+        if Path then
+            if Path.Parent.Name == "Key" then
+                if Entity.Main.Position.Y > -4 then
+                    if (LocalPlayer.Character.HumanoidRootPart.Position - Path.Position).Magnitude < 2 then
+                        if LocalPlayer.Character.HumanoidRootPart.Anchored == false then
+                            fireproximityprompt(Path.Parent.HidePrompt)
+                        end
+                    end
+                end
+            end
+        end
+        if Entity.Main.Position.Y < -4 then
+            if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+                LocalPlayer.Character:SetAttribute("Get", true)
+            end
+        end
+    else
+        if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+            LocalPlayer.Character:SetAttribute("Get", true)
         end
     end
 end)
