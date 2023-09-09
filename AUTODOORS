@@ -2,7 +2,17 @@
 -- Thanks Lion Kc Lee, WaterSea
 
 if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Hotel" then
-	game.StarterGui:SetCore("Notification", { Title = "Warning"; Text = " Script Not Work" })
+	game.StarterGui:SetWarning("Warning", { Title = "Hotel"; Text = "Not Work" })
+	
+	local Sound = Instance.new("Sound")
+	Sound.Parent = game.SoundService
+	Sound.SoundId = "rbxassetid://550209561"
+	Sound.Volume = 5
+	Sound.PlayOnRemove = true
+	Sound:Destroy()
+	
+elseif workspace:FindFirstChild("PathFindPartsFolder") then
+	game.StarterGui:SetWarning("Warning", { Title = "Warning"; Text = "Loser :)))" })
 	
 	local Sound = Instance.new("Sound")
 	Sound.Parent = game.SoundService
@@ -11,7 +21,6 @@ if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= 
 	Sound.PlayOnRemove = true
 	Sound:Destroy()
 end
-
 local PathfindingService = game:GetService("PathfindingService")
 local VirtualInputManager = game:GetService('VirtualInputManager')
 local LocalPlayer = game.Players.LocalPlayer
