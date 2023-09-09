@@ -1,8 +1,8 @@
--- Made by geodude#2619
--- Thanks lolcat, kardin!
+-- Made by rechedmcvn
+-- Thanks Lion Kc Lee, Void!
 
-if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Rooms" then
-	game.StarterGui:SetCore("SendNotification", { Title = "Invalid Place"; Text = "The game detected appears to not be rooms. Please execute this while in rooms!" })
+if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Hotel" then
+	game.StarterGui:SetCore("SendNotification", { Title = "Invalid Place"; Text = "The game detected appears to not be hotel. Please execute this while in hotel!" })
 	
 	local Sound = Instance.new("Sound")
 	Sound.Parent = game.SoundService
@@ -13,7 +13,7 @@ if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= 
 	
 	return
 elseif workspace:FindFirstChild("PathFindPartsFolder") then
-	game.StarterGui:SetCore("SendNotification", { Title = "Warning"; Text = "If you are having issues and the bot is broken, please contact me! geodude#2619" })
+	game.StarterGui:SetCore("SendNotification", { Title = "Warning"; Text = "If you are having issues and the bot is broken, please contact me! rechedmcvn" })
 	
 	local Sound = Instance.new("Sound")
 	Sound.Parent = game.SoundService
@@ -63,11 +63,11 @@ if LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindF
     LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.A90.Name = "lol" -- Fuck you A90
 end
 
-function getLocker()
+function getWardrobe()
     local Closest
 
     for i,v in pairs(workspace.CurrentRooms:GetDescendants()) do
-        if v.Name == "Rooms_Locker" then
+        if v.Name == "Wardrobe" then
             if v:FindFirstChild("Door") and v:FindFirstChild("HiddenPlayer") then
                 if v.HiddenPlayer.Value == nil then
                     if v.Door.Position.Y > -3 then -- Prevents going to the lower lockers in the room with the bridge 
@@ -89,9 +89,9 @@ end
 function getPath()
     local Part
 	
-    local Entity = workspace:FindFirstChild("A60") or workspace:FindFirstChild("A120")
+    local Entity = workspace:FindFirstChild("RushMoving") or workspace:FindFirstChild("AmbushMoving")
     if Entity and Entity.Main.Position.Y > -4 then
-        Part = getLocker()
+        Part = getWardrove()
     else
         Part = workspace.CurrentRooms[LatestRoom.Value].Door.Door
     end
@@ -99,9 +99,9 @@ function getPath()
 end
 
 LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()
-    TextLabel.Text = "Room: "..math.clamp(LatestRoom.Value, 1,1000)
+    TextLabel.Text = "Door: "..math.clamp(LatestRoom.Value, 1,100)
 
-    if LatestRoom.Value ~= 1000 then
+    if LatestRoom.Value ~= 100 then
         LocalPlayer.DevComputerMovementMode = Enum.DevComputerMovementMode.Scriptable
     else
         LocalPlayer.DevComputerMovementMode = Enum.DevComputerMovementMode.KeyboardMouse
@@ -115,7 +115,7 @@ LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()
         Sound.PlayOnRemove = true
         Sound:Destroy()
         
-        game.StarterGui:SetCore("SendNotification", { Title = "youtube.com/geoduude"; Text = "Thank you for using my script!" })
+        game.StarterGui:SetCore("SendNotification", { Title = "youtube.com/RECHEDMCVN"; Text = "Thank You Satisfied Use Script!" })
         return
     end
 end)
@@ -129,10 +129,10 @@ game:GetService("RunService").RenderStepped:connect(function()
 
     local Path = getPath()
     
-    local Entity = workspace:FindFirstChild("A60") or workspace:FindFirstChild("A120")
+    local Entity = workspace:FindFirstChild("RushMoving") or workspace:FindFirstChild("AmbushMoving")
     if Entity then
         if Path then
-            if Path.Parent.Name == "Rooms_Locker" then
+            if Path.Parent.Name == "Wardrobe" then
                 if Entity.Main.Position.Y > -4 then
                     if (LocalPlayer.Character.HumanoidRootPart.Position - Path.Position).Magnitude < 2 then
                         if LocalPlayer.Character.HumanoidRootPart.Anchored == false then
