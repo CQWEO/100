@@ -1,7 +1,16 @@
 -- Made by rechedmcvn
--- Thanks Lion Kc Lee, WaterSea_King
+-- Thanks Lion Kc Lee, WaterSea
 
-if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Hotel"
+if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Hotel" then
+	game.StarterGui:SetCore("Notification", { Title = "Warning"; Text = " Script Not Work" })
+	
+	local Sound = Instance.new("Sound")
+	Sound.Parent = game.SoundService
+	Sound.SoundId = "rbxassetid://550209561"
+	Sound.Volume = 5
+	Sound.PlayOnRemove = true
+	Sound:Destroy()
+end
 
 local PathfindingService = game:GetService("PathfindingService")
 local VirtualInputManager = game:GetService('VirtualInputManager')
@@ -18,7 +27,7 @@ TextLabel.Parent = ScreenGui
 
 TextLabel.Size = UDim2.new(0,350,0,100)
 TextLabel.TextSize = 3
-TextLabel.TextStrokeColor3 = Color3.new(1,1,1)
+TextLabel.TextStrokeColor3 = Color3.new(7,9,9)
 TextLabel.TextStrokeTransparency = 0
 TextLabel.BackgroundTransparency = 1
 
@@ -37,8 +46,8 @@ local Folder = Instance.new("Folder")
 Folder.Parent = workspace
 Folder.Name = "PathFindPartsFolder"
 
-if LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("SeekMoving") then
-    LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.SeekMoving.Name = "lol" -- Fuck you SeekMoving
+if LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules:FindFirstChild("A90") then
+    LocalPlayer.PlayerGui.MainUI.Initiator.Main_Game.RemoteListener.Modules.A90.Name = "lol" -- Fuck you A90
 end
 
 function getWardrobe()
