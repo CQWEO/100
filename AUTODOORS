@@ -1,27 +1,7 @@
 -- Made by rechedmcvn
--- Thanks Lion Kc Lee, WaterSea Ÿ
+-- Thanks Lion Kc Lee, WaterSea_King
 
 if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Hotel"
-
-	local Sound = Instance.new("Sound")
-	Sound.Parent = game.SoundService
-	Sound.SoundId = "rbxassetid://550209561"
-	Sound.Volume = 5
-	Sound.PlayOnRemove = true
-	Sound:Destroy()
-	
-	return
-elseif workspace:FindFirstChild("PathFindPartsFolder") then
-	game.StarterGui:SetCore("SendNotification", { Title = "Warning"; Text = "If you are having issues and the bot is broken, please contact me! rechedmcvn" })
-	
-	local Sound = Instance.new("Sound")
-	Sound.Parent = game.SoundService
-	Sound.SoundId = "rbxassetid://550209561"
-	Sound.Volume = 5
-	Sound.PlayOnRemove = true
-	Sound:Destroy()
-
-	return
 end
 
 local PathfindingService = game:GetService("PathfindingService")
@@ -90,23 +70,13 @@ function getPath()
 	
     local Entity = workspace:FindFirstChild("RushMoving") or workspace:FindFirstChild("AmbushMoving")
     if Entity and Entity.Main.Position.Y > -4 then
-        Part = getWardrobe()
+        Part = getWardrove()
     else
         Part = workspace.CurrentRooms[LatestRoom.Value].Door.Door
     end
     return Part
 end
 
-function getItem()
-    local Key
-
-    local Item = workspace:FinForChild("Key")
-    if Item Item.Main.Positon.Y > -5 then
-       Item = getKey()
-    else
-        Item = workspace.CurrentRooms[LatestRoom.Value].Door.Door
-    end
-         
 LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()
     TextLabel.Text = "Door: "..math.clamp(LatestRoom.Value, 1,100)
 
@@ -153,12 +123,12 @@ game:GetService("RunService").RenderStepped:connect(function()
         end
         if Entity.Main.Position.Y < -4 then
             if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
-                LocalPlayer.Character:SetAttribute("Hiding", true)
+                LocalPlayer.Character:SetAttribute("Hiding", false)
             end
         end
     else
         if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
-            LocalPlayer.Character:SetAttribute("Hiding", true)
+            LocalPlayer.Character:SetAttribute("Hiding", false)
         end
     end
 end)
