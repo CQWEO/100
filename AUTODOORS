@@ -110,7 +110,19 @@ function getPath()
 	
     local Entity = workspace:FindFirstChild("RushMoving") or workspace:FindFirstChild("AmbushMoving")
     if Entity and Entity.Main.Position.Y > -6 then
-        Part = getWardrove()
+        Part = getWardrobe()
+    else
+        Part = workspace.CurrentRooms[LatestRoom.Value].Door.Door
+    end
+    return Part
+end
+
+function getPath()
+    local Part
+	
+    local Key = workspace:FindFirstChild("KeyObtain")
+    if KeyObtain and Key.Main.Position.Y > -7 then
+        Part = getKeyObtain()
     else
         Part = workspace.CurrentRooms[LatestRoom.Value].Door.Door
     end
@@ -191,12 +203,7 @@ end)
         if Key.Main.Position.Y < -5 then
             if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
                 LocalPlayer.Character:SetAttribute("Get", true)
-            end
-        end
-    else
-        if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
-            LocalPlayer.Character:SetAttribute("Get", true)
-        end
+       end
     end
 end)
 
