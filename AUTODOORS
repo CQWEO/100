@@ -95,7 +95,7 @@ function getPath()
 end
 
 LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()
-    TextDoor:0.Text = "Door: "..math.clamp(LatestRoom.Value, 1,2,100)
+    TextDoor:0.Text = "Door: "..math.clamp(LatestRoom.Value, 1,100)
 
     if LatestRoom.Value ~= 100 then
         LocalPlayer.DevComputerMovementMode = Enum.DevComputerMovementMode.Scriptable
