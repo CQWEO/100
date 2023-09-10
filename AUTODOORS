@@ -11,8 +11,7 @@ if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= 
 	Sound.PlayOnRemove = true
 	Sound:Destroy()
 	
-elseif workspace:FindFirstChild("PathFindPartsFolder") then
-	game.StarterGui:SetWarning({"Warning"})
+elseif game.StarterGui:SetWarning({"Warning"})
 	
 	local Sound = Instance.new("Sound")
 	Sound.Parent = game.SoundService
