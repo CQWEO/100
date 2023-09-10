@@ -2,7 +2,7 @@
 -- Thanks Lion Kc Lee, WaterSea
 
 if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= "Hotel" then
-	game.StarterGui:SetWarning("Warning", { Title = "Hotel"; Text = "Not Work" })
+	game.StarterGui:SetWarning({"Warning"})
 	
 	local Sound = Instance.new("Sound")
 	Sound.Parent = game.SoundService
@@ -12,7 +12,7 @@ if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= 
 	Sound:Destroy()
 	
 elseif workspace:FindFirstChild("PathFindPartsFolder") then
-	game.StarterGui:SetWarning("Warning", { Title = "Warning"; Text = "Loser :)))" })
+	game.StarterGui:SetWarning({"Warning"})
 	
 	local Sound = Instance.new("Sound")
 	Sound.Parent = game.SoundService
