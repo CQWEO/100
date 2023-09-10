@@ -66,7 +66,7 @@ function getWardrobe()
         if v.Name == "Wardrobe" then
             if v:FindFirstChild("Door") and v:FindFirstChild("HiddenPlayer") then
                 if v.HiddenPlayer.Value == nil then
-                    if v.Door.Position.Y > -3 then -- Prevents going to the lower lockers in the room with the bridge 
+                    if v.Door.Position.Y > -4 then -- Prevents going to the lower lockers in the room with the bridge 
                         if Closest == nil then
                             Closest = v.Door
                         else
@@ -82,11 +82,34 @@ function getWardrobe()
     return Closest
 end
 
+function getKey()
+    local KeyObtain
+
+    for i,v in pairs(workspace.CurrentRooms:GetKeyObtain()) do
+        if v.Name == "KeyObtain" then
+            if v:FindFirstChild("Door") and v:FindFirstChild("GetForPlayer") then
+                if v.GetForPlayer.Value == nil then
+                    if v.Door.Position.Y > -5 then -- Use KeyObtain Locked Door Locker
+                        if KeyObtain == nil then
+                            KeyObtain = v.Door
+                        else
+                            if  (LocalPlayer.Character.HumanoidRootPart.Position - v.Door.Position).Magnitude < (KeyObtain.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude then
+                                KeyObtain = v.Door
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return KeyObtain
+end
+
 function getPath()
     local Part
 	
     local Entity = workspace:FindFirstChild("RushMoving") or workspace:FindFirstChild("AmbushMoving")
-    if Entity and Entity.Main.Position.Y > -4 then
+    if Entity and Entity.Main.Position.Y > -6 then
         Part = getWardrove()
     else
         Part = workspace.CurrentRooms[LatestRoom.Value].Door.Door
@@ -95,7 +118,7 @@ function getPath()
 end
 
 LatestRoom:GetPropertyChangedSignal("Value"):Connect(function()
-    TextDoor:0.Text = "Door: "..math.clamp(LatestRoom.Value, 1,100)
+    Text.Text = "Door: "..math.clamp(LatestRoom.Value, 1,100)
 
     if LatestRoom.Value ~= 100 then
         LocalPlayer.DevComputerMovementMode = Enum.DevComputerMovementMode.Scriptable
@@ -150,13 +173,40 @@ game:GetService("RunService").RenderStepped:connect(function()
     end
 end)
 
+    local Path = getPath()
+
+    local Key = workspace:FindFirstChild("KeyObtain")
+    if Key then
+        if Path then
+            if Path.Parent.Name == "KeyObtain" then
+                if Key.Main.Position.Y > -5 then
+                    if (LocalPlayer.Character.HumanoidRootPart.Position - Path.Position).Magnitude < 2 then
+                        if LocalPlayer.Character.HumanoidRootPart.Anchored == false then
+                            fireproximityprompt(Path.Parent.HaveKeyPrompt)
+                        end
+                    end
+                end
+            end
+        end
+        if Key.Main.Position.Y < -5 then
+            if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+                LocalPlayer.Character:SetAttribute("Get", true)
+            end
+        end
+    else
+        if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+            LocalPlayer.Character:SetAttribute("Get", true)
+        end
+    end
+end)
+
 while true do
 
     task.wait()
 
     local Destination = getPath()
 
-    local path = PathfindingService:CreatePath({ WaypointSpacing = 5, AgentRadius = 0.5, AgentCanJump = false })
+    local path = PathfindingService:CreatePath({ WaypointSpacing = 1, AgentRadius = 0.1, AgentCanJump = false })
     path:ComputeAsync(LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(0,3,0), Destination.Position)
     local Waypoints = path:GetWaypoints()
 
@@ -166,9 +216,9 @@ while true do
 
         for _, Waypoint in pairs(Waypoints) do
             local part = Instance.new("Part")
-            part.Size = Vector3.new(0,3,0)
+            part.Size = Vector3.new(1,1,1)
             part.Position = Waypoint.Position
-            part.Shape = "Square"
+            part.Shape = "Cylinder"
             part.Rotation = Vector3.new(0,0,90)
             part.Material = "SmoothPlastic"
             part.Anchored = true
