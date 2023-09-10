@@ -35,7 +35,7 @@ local TextLabel = Instance.new("TextLabel")
 TextLabel.Parent = ScreenGui
 
 TextLabel.Size = UDim2.new(0,350,0,100)
-TextLabel.TextSize = 40
+TextLabel.TextSize = 0
 TextLabel.TextStrokeColor3 = Color3.new(7,9,9)
 TextLabel.TextStrokeTransparency = 0
 TextLabel.BackgroundTransparency = 1
@@ -140,12 +140,37 @@ game:GetService("RunService").RenderStepped:connect(function()
         end
         if Entity.Main.Position.Y < -4 then
             if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
-                LocalPlayer.Character:SetAttribute("Hiding", false)
+                LocalPlayer.Character:SetAttribute("Hiding", true)
             end
         end
     else
         if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
-            LocalPlayer.Character:SetAttribute("Hiding", false)
+            LocalPlayer.Character:SetAttribute("Hiding", true)
+        end
+    end
+end)
+
+    local Item = workspace:FindFirstChild("Key")
+    if Item then
+        if Path then
+            if Item.Parent.Name == "Key" then
+                if Item.Main.Position.Y > -4 then
+                    if (LocalPlayer.Character.HumanoidRootPart.Position - Path.Position).Magnitude < 2 then
+                        if LocalPlayer.Character.HumanoidRootPart.Anchored == false then
+                            fireproximityprompt(Path.Parent.GetPrompt)
+                        end
+                    end
+                end
+            end
+        end
+        if Entity.Main.Position.Y < -4 then
+            if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+                LocalPlayer.Character:SetAttribute("Get", true)
+            end
+        end
+    else
+        if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
+            LocalPlayer.Character:SetAttribute("Get", true)
         end
     end
 end)
