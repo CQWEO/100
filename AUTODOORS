@@ -11,7 +11,8 @@ if game.PlaceId ~= 6839171747 or game.ReplicatedStorage.GameData.Floor.Value ~= 
 	Sound.PlayOnRemove = true
 	Sound:Destroy()
 	
-elseif game.StarterGui:SetWarning({"Warning"})
+elseif workspace:FindFirstChild("Most") then
+       game.StarterGui:SetWarning({"Warning"})
 	
 	local Sound = Instance.new("Sound")
 	Sound.Parent = game.SoundService
@@ -34,7 +35,7 @@ local TextLabel = Instance.new("TextLabel")
 TextLabel.Parent = ScreenGui
 
 TextLabel.Size = UDim2.new(0,350,0,100)
-TextLabel.TextSize = 3
+TextLabel.TextSize = 40
 TextLabel.TextStrokeColor3 = Color3.new(7,9,9)
 TextLabel.TextStrokeTransparency = 0
 TextLabel.BackgroundTransparency = 1
