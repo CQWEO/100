@@ -156,7 +156,7 @@ while true do
 
     local Destination = getPath()
 
-    local path = PathfindingService:CreatePath({ WaypointSpacing = 1, AgentRadius = 0.1, AgentCanJump = false })
+    local path = PathfindingService:CreatePath({ WaypointSpacing = 5, AgentRadius = 0.5, AgentCanJump = true })
     path:ComputeAsync(LocalPlayer.Character.HumanoidRootPart.Position - Vector3.new(0,3,0), Destination.Position)
     local Waypoints = path:GetWaypoints()
 
@@ -166,18 +166,18 @@ while true do
 
         for _, Waypoint in pairs(Waypoints) do
             local part = Instance.new("Part")
-            part.Size = Vector3.new(1,1,1)
+            part.Size = Vector3.new(0,3,0)
             part.Position = Waypoint.Position
-            part.Shape = "Cylinder"
+            part.Shape = "Square"
             part.Rotation = Vector3.new(0,0,90)
             part.Material = "SmoothPlastic"
             part.Anchored = true
-            part.CanCollide = false
+            part.CanCollide = true
             part.Parent = Folder
         end
 
         for _, Waypoint in pairs(Waypoints) do
-            if LocalPlayer.Character.HumanoidRootPart.Anchored == false then
+            if LocalPlayer.Character.HumanoidRootPart.Anchored == true then
                 LocalPlayer.Character.Humanoid:MoveTo(Waypoint.Position)
                 LocalPlayer.Character.Humanoid.MoveToFinished:Wait()
             end
